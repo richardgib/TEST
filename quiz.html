@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Тест — Doom</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;padding:16px;color:#111}
+    .btn{padding:8px 12px;margin-top:8px}
+    .hidden{display:none}
+    img{max-width:100%;height:auto;margin-top:12px;border:1px solid #ccc}
+    .result{margin-top:12px;font-weight:600}
+  </style>
+</head>
+<body>
+  <h3>Вопрос 1: выберите правильный ответ</h3>
+  <form id="quiz">
+    <label><input type="radio" name="q1" value="A"> А</label><br>
+    <label><input type="radio" name="q1" value="B"> Б</label><br>
+    <label><input type="radio" name="q1" value="C"> В</label><br>
+    <button type="button" id="check" class="btn">Проверить</button>
+  </form>
+
+  <div id="message" class="result hidden"></div>
+
+  <!-- Картинка из Википедии (Doom) — будет показана при правильном ответе -->
+  <a id="wikiLink" href="https://ru.wikipedia.org/wiki/Doom" target="_blank" class="hidden">
+    <img id="wikiImg" alt="Doom — изображение" src="https://upload.wikimedia.org/wikipedia/commons/5/57/Doom_cover_art.png">
+  </a>
+
+  <script>
+    (function(){
+      var correct = 'B';
+      var checkBtn = document.getElementById('check');
+      var msg = document.getElementById('message');
+      var wikiLink = document.getElementById('wikiLink');
+
+      checkBtn.addEventListener('click', function(){
+        var form = document.getElementById('quiz');
+        var choice = form.q1.value;
+        if (!choice) {
+          msg.className = 'result';
+          msg.textContent = 'Пожалуйста, выберите ответ.';
+          wikiLink.className = 'hidden';
+          return;
+        }
+        if (choice === correct) {
+          msg.className = 'result';
+          msg.textContent = 'Правильно!';
+          wikiLink.className = ''; // показать картинку и ссылку
+        } else {
+          msg.className = 'result';
+          msg.textContent = 'Неправильно. Попробуйте ещё раз.';
+          wikiLink.className = 'hidden';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
